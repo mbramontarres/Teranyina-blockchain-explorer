@@ -1,0 +1,164 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type EventType {
+  eventIndex: Int!
+  blockNum: Int!
+  blockTimestamp: Float!
+  extrinsicIndex: Int!
+  method: String!
+  section: String!
+  phase: String!
+  doc: String!
+  data: String!
+  extrinsicHash: String!
+}
+
+type ExtrinsicType {
+  blockNum: Int!
+  blockTimestamp: Float!
+  extrinsicIndex: Int!
+  section: String!
+  method: String!
+  extrinsicHash: String!
+  success: Boolean!
+  events: [EventType!]!
+  params: String!
+  doc: String!
+  finalized: Boolean!
+}
+
+type BlockType {
+  blockNum: Int!
+  blockTimestamp: Float!
+  blockHash: String!
+  parentHash: String!
+  stateRoot: String!
+  extrinsicsRoot: String!
+  extrinsics: [ExtrinsicType!]!
+  events: [EventType!]!
+  eventCount: Int!
+  extrinsicsCount: Int!
+  specVersion: Int!
+  blockAuthor: String!
+  finalized: Boolean!
+}
+
+type TransferType {
+  blockNum: Int!
+  extrinsicIndex: Int!
+  section: String!
+  method: String!
+  blockTimestamp: Float!
+  hash: String!
+  source: String!
+  destination: String!
+  amount: Float!
+  fee: Float
+  success: Boolean!
+  events: [EventType!]!
+}
+
+type transferHistory {
+  total: Int!
+  _id: String!
+}
+
+type AccountType {
+  accountId: String!
+  nonce: Float!
+  availableBalance: String!
+  freeBalance: String!
+  lockedBalance: String!
+  reservedBalance: String!
+  totalBalance: String!
+}
+
+input EventInputType {
+  eventIndex: Int!
+  blockNum: Int!
+  blockTimestamp: Float!
+  extrinsicIndex: Int!
+  method: String!
+  section: String!
+  phase: String!
+  doc: String!
+  data: String!
+  extrinsicHash: String!
+}
+
+input ExtrinsicInputType {
+  blockNum: Int!
+  blockTimestamp: Float!
+  extrinsicIndex: Int!
+  section: String!
+  method: String!
+  extrinsicHash: String!
+  success: Boolean!
+  events: [EventInputType!]!
+  params: String!
+  doc: String!
+  finalized: Boolean!
+}
+
+input BlockInputType {
+  blockNum: Int!
+  blockTimestamp: Float!
+  blockHash: String!
+  parentHash: String!
+  stateRoot: String!
+  extrinsicsRoot: String!
+  extrinsics: [ExtrinsicInputType!]!
+  events: [EventInputType!]!
+  eventCount: Int!
+  extrinsicsCount: Int!
+  specVersion: Int!
+  blockAuthor: String!
+  finalized: Boolean!
+}
+
+input TransferInputType {
+  blockNum: Int!
+  extrinsicIndex: Int!
+  section: String!
+  method: String!
+  blockTimestamp: Float!
+  hash: String!
+  source: String!
+  destination: String!
+  amount: Float!
+  fee: Float
+  success: Boolean!
+  events: [EventInputType!]!
+}
+
+input AccountInputType {
+  accountId: String!
+  nonce: Float!
+  availableBalance: String!
+  freeBalance: String!
+  lockedBalance: String!
+  reservedBalance: String!
+  totalBalance: String!
+}
+
+type Query {
+  blocks(skip: Int = 0, take: Int = 25): [BlockType!]!
+  block(blockNum: Float!): BlockType
+  blocksCount: Int!
+  extrinsics(skip: Int = 0, take: Int = 25): [ExtrinsicType!]!
+  extrinsic(blockNum: Float!, extrinsicIndex: Float!): ExtrinsicType
+  extrinsicsCount: Int!
+  events(skip: Int = 0, take: Int = 25): [EventType!]!
+  event(blockNum: Float!, eventIndex: Float!): EventType
+  eventsCount: Int!
+  transfers(skip: Int = 0, take: Int = 25): [TransferType!]!
+  accountTransfers(accountId: String!, skip: Int = 0, take: Int = 25): [TransferType!]!
+  transfer(hash: String!): TransferType!
+  transfersCount: Int!
+  transferHistory: [transferHistory!]!
+  accounts(skip: Int = 0, take: Int = 25): [AccountType!]!
+  account(accountId: String!): AccountType!
+  accountsCount: Int!
+}
